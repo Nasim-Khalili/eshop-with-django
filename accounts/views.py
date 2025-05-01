@@ -30,7 +30,7 @@ def signin(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"شما با نام کاربری {username} وارد شدید.")
-                return redirect('product_list')
+                return redirect('shop:product_list')
         else:
             messages.error(request, "نام کاربری یا رمز عبور نامعتبر است.")
     else:
@@ -40,4 +40,4 @@ def signin(request):
 def signout(request):
     logout(request)
     messages.info(request, "شما با موفقیت خارج شدید.")
-    return redirect('product_list')
+    return redirect('shop:product_list')
