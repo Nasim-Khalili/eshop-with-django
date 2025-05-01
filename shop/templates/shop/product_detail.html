@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
+    </div>
+    <div class="col-md-6">
+        <h1>{{ product.name }}</h1>
+        <p class="text-muted">{{ product.category.name }}</p>
+        <p>{{ product.description }}</p>
+        <h3 class="text-danger">{{ product.price }} تومان</h3>
+
+        <!-- فرم افزودن به سبد خرید -->
+        <form method="post" action="{% url 'shop:add_to_cart' product.id %}">
+            {% csrf_token %}
+            <label for="quantity">تعداد:</label>
+            <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control mb-3" style="width: 100px;">
+            <button type="submit" class="btn btn-success">افزودن به سبد خرید</button>
+        </form>
+    </div>
+</div>
+
+<!-- نمایش پیام‌ها -->
+{% if messages %}
+    <div class="mt-4">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}
